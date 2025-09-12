@@ -8,7 +8,6 @@
 @Desc    :   None
 """
 
-
 import logging
 from mcp.server import FastMCP
 from tools import register_tools
