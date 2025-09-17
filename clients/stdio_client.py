@@ -38,9 +38,23 @@ async def fastmcp_main():
         tools = await client.list_tools()
         resources = await client.list_resources()
         prompts = await client.list_prompts()
-        print(tools)
-        result = await client.call_tool("web_search", {"query": "今天杭州天气"})
-        print(result)
+        for tool in tools:
+            print(tool.name)
+        #     story_prompt: str = None,
+        # language: Language = Language.CHINESE_CN,
+        # segments: int = 3,
+        story_prompt = await client.call_tool("get_story_prompt", {"story_prompt": "白色的小兔子"})
+        
+        story_prompt = story_prompt.content[0].text
+        
+        result = await client.call_tool("generate_story", {"story_prompt": story_prompt})
+
+        print(type(result.content[0].text))
+        
+        images_prompt = result.content[0].text["list"]
+
+        for item in images_prompt:
+            print(item["image_prompt"])
 
 if __name__ == "__main__":
     asyncio.run(fastmcp_main())

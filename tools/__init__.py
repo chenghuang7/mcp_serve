@@ -10,6 +10,7 @@
 from mcp.server import FastMCP
 from . import web_search
 from . import math_tool
+from . import story_tool
 
 
 def register_tools(app: FastMCP):
@@ -19,3 +20,4 @@ def register_tools(app: FastMCP):
     """
     web_search.register(app)
     math_tool.register(app)
+    story_tool.register(app)
