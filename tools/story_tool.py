@@ -34,7 +34,7 @@ def register(app: FastMCP):
         @desc     : 生成图片
         @param    : images_prompts
         @param    : resolution 
-        @return   :
+        @return   : 返回每个场景对应的图片链接
         """
 
         image_urls = []

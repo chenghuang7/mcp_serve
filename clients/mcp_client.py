@@ -154,6 +154,8 @@ class ChatEngine:
         """
         @description : 打印对话历史
         """
+        if len(messages) == 0:
+            return
         print("\n=== 对话历史 ===")
         for i, msg in enumerate(messages, 1):
             role = msg.get("role", "unknown")
@@ -172,7 +174,7 @@ class ChatEngine:
                             print(f"[助手调用工具 {i}] {fn.get('name')} 参数: {fn.get('arguments')}")
 
             elif role == "tool":
-                print(f"[工具结果 {i}] {msg.get('content')}")
+                print(f"[工具结果 {i}] {msg.get('content')[:20]}...")
 
         print("================\n")
 
@@ -185,12 +187,8 @@ class ChatEngine:
             elif len(query) < 1:
                 continue
             try:
-                self.messages.append(
-                    {
-                        "role": "user",
-                        "content": query,
-                    }
-                )
+                print(f"[助手调用工具完成任务'{query}'中...]")
+                self.messages.append({"role": "user", "content": query})
                 response = await self.process_query(query)
 
             except Exception as e:
